@@ -3,6 +3,7 @@ let slideScene;
 let pageScene;
 let mouse = document.querySelector(".cursor")
 let mouseText = mouse.querySelector('span')
+let burger = document.querySelector(".burger")
 
 function animateSlides() {
   // initiate Conroller
@@ -82,7 +83,27 @@ const item = e.target;
   }
 }
 
+function navToggle  (e) {
+  if(!e.target.classList.contains("active")){
+    e.target.classList.add("active")
+    gsap.to(".line1",1,{rotate:"45deg",y:5,background:"black"})
+  gsap.to(".line2",1,{rotate:"-45deg",y:-5,background:"black"})
+  gsap.to("#logo",1,{color:"black"})
+  gsap.to(".nav-bar",1,{clipPath: 'circle(2500px at 100% -10%)'})
+  document.body.classList.add("hide")
+  }else{
+    e.target.classList.remove("active")
+    gsap.to(".line1",1,{rotate:"0deg",y:5,background:"white"})
+  gsap.to(".line2",1,{rotate:"0deg",y:-5,background:"white"})
+  gsap.to("#logo",1,{color:"white"})
+  gsap.to(".nav-bar",1,{clipPath: 'circle(50px at 100% -10%)'})
+  document.body.classList.remove("hide")
+
+  }
+  
+}
 
 window.addEventListener('mousemove',cursor)
 window.addEventListener("mouseover",activeCursor)
+burger.addEventListener("click",navToggle)
 animateSlides();
